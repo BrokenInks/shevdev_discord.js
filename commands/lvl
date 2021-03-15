@@ -1,0 +1,17 @@
+const Levels = require('discord-xp')
+const {MessageEmbed} = require('discord.js')
+module.exports = {
+    name: 'lvl',
+    callback: async({message}) => {
+        const user = await Levels.fetch(message.author.id, message.guild.id)
+        const member = message.member
+        message.channel.send(new MessageEmbed()
+        .setColor('BLUE')
+        .setDescription(`
+**${member.tag}**
+Уровень: \`${user.level}\`
+Опыт: ${user.xp} **:** ${(user.level + 1) * (user.level + 1) * 100}
+        `)
+        )
+    }
+}
